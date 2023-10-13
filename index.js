@@ -20,7 +20,7 @@ app.use('/', (req,res,next) =>{
     next();
 })
 
-app.use((req,res,next) => {
+const auth = ((req,res,next) => {
     const { password } = req.query; 
     if (password === 'ninjasaga') {
         next();
@@ -30,6 +30,10 @@ app.use((req,res,next) => {
 
 app.get('/', (req,res) => {
     res.send('Hello world')
+})
+
+app.get('/admin', auth, (req,res) => {
+    res.send('Hello Admin')
 })
 
 app.get('/halaman', (req,res) => {
